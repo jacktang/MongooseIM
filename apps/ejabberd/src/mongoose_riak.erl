@@ -33,6 +33,7 @@
 -export([get_worker/0]).
 -export([create_new_map/1]).
 -export([update_map/2]).
+-export([search/2, search/3]).
 
 -export([make_pool_name/1, get_pool_name/1]).
 
@@ -133,6 +134,12 @@ create_new_map(Ops) ->
 -spec update_map(riakc_map:crdt_map(), [riakc_map_op()]) -> riakc_map:crdt_map().
 update_map(Map, Ops) ->
     lists:foldl(fun update_map_op/2, Map, Ops).
+
+search(Index, Query) ->
+    search(Index, Query, []).
+
+search(Index, Query, Opts) ->
+    ?CALL(search, [Index, Query, Opts]).
 
 -spec get_worker() -> pid() | undefined.
 get_worker() ->
