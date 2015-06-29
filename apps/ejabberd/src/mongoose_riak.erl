@@ -30,6 +30,7 @@
 -export([update_type/3, update_type/4]).
 -export([fetch_type/2, fetch_type/3]).
 -export([list_keys/1]).
+-export([list_buckets/1]).
 -export([get_worker/0]).
 -export([create_new_map/1]).
 -export([update_map/2]).
@@ -126,6 +127,9 @@ fetch_type(Bucket, Key, Opts) ->
 list_keys(Bucket) ->
     ?CALL(list_keys, [Bucket]).
 
+-spec list_buckets(binary()) -> list().
+list_buckets(Type) ->
+    ?CALL(list_buckets, [Type]).
 
 -spec create_new_map([riakc_map_op()]) -> riakc_map:crdt_map().
 create_new_map(Ops) ->
